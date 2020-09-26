@@ -1,26 +1,113 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using Learn.WebApp.Server.Middleware;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
+using System.Threading.Tasks;
 
 namespace Learn.WebApp.Server
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            using var host = CreateHostBuilder(args).Build();
+
+            await host.RunAsync().ConfigureAwait(false);
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host
+                .CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.ConfigureLogging((context, logging) =>
+                    {
+                        var logger = new LoggerConfiguration()
+                            .WriteTo.Console(context.HostingEnvironment.IsDevelopment() ? LogEventLevel.Information : LogEventLevel.Warning)
+                            .CreateLogger();
+
+                        logging.ClearProviders();
+                        logging.AddSerilog(logger, true);
+                    }); 
+
+                    webBuilder.ConfigureServices((context, services) =>
+                    {
+                        // add web api services
+                        services.AddControllersWithViews();
+                        services.AddRazorPages();
+                        services.AddSingleton<ActivityMiddleware>();
+                        services.Configure<JsonOptions>(options =>
+                        {
+                            options.JsonSerializerOptions.IgnoreNullValues = true;
+                        });
+
+                        // add swagger services
+                        services.AddSwaggerGen();
+
+                        // add orleans cluster services
+                        services.AddLearnClusterClient(options => context.Configuration.Bind("LearnClusterClient", options));
+
+                        // add auto mapper services
+                        services.AddAutoMapper(options =>
+                        {
+                            options.AddProfile<AutoMapperProfile>();
+                        });
+
+                        // add repositories
+                        services.AddSqlServerRepository(options =>
+                        {
+                            options.ConnectionString = context.Configuration.GetConnectionString("Learn");
+                        });
+                    });
+
+                    webBuilder.Configure((context, app) =>
+                    {
+                        var env = app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
+
+                        if (env.IsDevelopment())
+                        {
+                            app.UseDeveloperExceptionPage();
+                            app.UseWebAssemblyDebugging();
+                        }
+                        else
+                        {
+                            app.UseExceptionHandler("/Error");
+
+                            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                            app.UseHsts();
+                        }
+
+                        app.UseHttpsRedirection();
+                        app.UseBlazorFrameworkFiles();
+                        app.UseStaticFiles();
+
+                        app.UseSwagger();
+                        app.UseSwaggerUI(options =>
+                        {
+                            options.SwaggerEndpoint("/swagger/v1/swagger.json", "Learn V1");
+                        });
+
+                        app.UseMiddleware<ActivityMiddleware>();
+
+                        app.UseRouting();
+                        app.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapRazorPages();
+                            endpoints.MapControllers();
+                            endpoints.MapFallbackToFile("index.html");
+                        });
+                    });
+
+                    webBuilder.SuppressStatusMessages(true);
                 });
+        }
     }
 }

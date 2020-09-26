@@ -1,0 +1,23 @@
+﻿CREATE TABLE [dbo].[CoursePath]
+(
+	[Key] UNIQUEIDENTIFIER NOT NULL,
+	[Name] NVARCHAR(1000) NOT NULL,
+	[Slug] NVARCHAR(1000) NOT NULL,
+	[Version] UNIQUEIDENTIFIER NOT NULL,
+	
+	CONSTRAINT [PK_CoursePath] PRIMARY KEY CLUSTERED
+	(
+		[Key]
+	),
+
+	CONSTRAINT [CHK_Name_Unique] UNIQUE
+	(
+		[Name]
+	),
+
+	CONSTRAINT [CHK_Slug_Unique] UNIQUE
+	(
+		[Slug]
+	)
+)
+GO

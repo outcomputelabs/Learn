@@ -1,10 +1,11 @@
-﻿using Learn.WebApp.Shared;
+﻿using AutoMapper;
+using Learn.Server.Grains;
+using Learn.WebApp.Shared;
+using Microsoft.AspNetCore.Mvc;
+using Orleans;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace Learn.WebApp.Server.Controllers
 {
@@ -12,29 +13,26 @@ namespace Learn.WebApp.Server.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly IGrainFactory _factory;
+        private readonly IMapper _mapper;
 
-        private readonly ILogger<WeatherForecastController> logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(IGrainFactory factory, IMapper mapper)
         {
-            this.logger = logger;
+            _factory = factory ?? throw new ArgumentNullException(nameof(factory));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<ActionResult<IEnumerable<WeatherForecast>>> GetAsync()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var forecasts = await _factory
+                .GetWeatherForecastGrain()
+                .GetAllAsync()
+                .ConfigureAwait(false);
+
+            var result = _mapper.Map<IEnumerable<WeatherForecast>>(forecasts);
+
+            return Ok(result);
         }
     }
 }
