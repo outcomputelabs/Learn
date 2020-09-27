@@ -1,4 +1,14 @@
 ﻿@page "/admin/course-paths"
+@inject LearnClient Client
 
 <h1>Course Paths</h1>
 
+@if (_models != null)
+{
+    @foreach (var model in _models)
+    {
+        <div>
+            @model.Key
+        </div>
+    }
+}

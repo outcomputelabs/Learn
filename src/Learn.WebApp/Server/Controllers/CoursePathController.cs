@@ -2,7 +2,6 @@
 using Learn.Server.Data.Exceptions;
 using Learn.Server.Data.Repositories;
 using Learn.Server.Shared;
-using Learn.WebApp.Shared;
 using Learn.WebApp.Shared.Conflict;
 using Learn.WebApp.Shared.CoursePath;
 using Microsoft.AspNetCore.Mvc;
@@ -36,15 +35,15 @@ namespace Learn.WebApp.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CoursePathApiModel>>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<ActionResult<IEnumerable<CoursePathResponseModel>>> GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await _repository.GetAllAsync(cancellationToken).ConfigureAwait(false);
 
-            return Ok(_mapper.Map<IEnumerable<CoursePathApiModel>>(result));
+            return Ok(_mapper.Map<IEnumerable<CoursePathResponseModel>>(result));
         }
 
         [HttpGet("{key}")]
-        public async Task<ActionResult<CoursePathApiModel>> GetAsync([FromRoute, Required] Guid key)
+        public async Task<ActionResult<CoursePathResponseModel>> GetAsync([FromRoute, Required] Guid key)
         {
             // get the cached entity
             var result = await _factory.GetCoursePathGrain(key).GetAsync().ConfigureAwait(false);
@@ -53,12 +52,12 @@ namespace Learn.WebApp.Server.Controllers
             if (result is null) return NotFound();
 
             // the entity exists
-            return Ok(_mapper.Map<CoursePathApiModel>(result));
+            return Ok(_mapper.Map<CoursePathResponseModel>(result));
         }
 
         [HttpPost]
         [SwaggerResponse(409, Type = typeof(ConflictApiResponseModel))]
-        public async Task<ActionResult<CoursePathApiModel>> PostAsync([FromBody, Required, DisallowNull] CoursePathApiModel input)
+        public async Task<ActionResult<CoursePathResponseModel>> PostAsync([FromBody, Required, DisallowNull] CoursePathPostRequestModel input)
         {
             // to keep the compiler happy
             if (input is null) return BadRequest();
@@ -115,7 +114,7 @@ namespace Learn.WebApp.Server.Controllers
                 });
             }
 
-            return Ok(_mapper.Map<CoursePathApiModel>(result));
+            return Ok(_mapper.Map<CoursePathResponseModel>(result));
         }
 
         [HttpDelete]

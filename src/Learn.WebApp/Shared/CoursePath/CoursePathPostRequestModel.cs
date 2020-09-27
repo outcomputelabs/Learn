@@ -1,16 +1,16 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Learn.WebApp.Shared
+namespace Learn.WebApp.Shared.CoursePath
 {
-    public class CoursePathApiModel
+    public class CoursePathPostRequestModel
     {
         public Guid? Key { get; set; }
 
-        [Required, MaxLength(1000)]
+        [Required]
         public string? Name { get; set; }
 
-        [Required, MaxLength(1000)]
+        [Required]
         public string? Slug { get; set; }
 
         public Guid? Version { get; set; }

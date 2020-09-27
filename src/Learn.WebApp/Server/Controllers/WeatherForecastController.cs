@@ -23,14 +23,14 @@ namespace Learn.WebApp.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<WeatherForecast>>> GetAsync()
+        public async Task<ActionResult<IEnumerable<WeatherForecastModel>>> GetAsync()
         {
             var forecasts = await _factory
                 .GetWeatherForecastGrain()
                 .GetAllAsync()
                 .ConfigureAwait(false);
 
-            var result = _mapper.Map<IEnumerable<WeatherForecast>>(forecasts);
+            var result = _mapper.Map<IEnumerable<WeatherForecastModel>>(forecasts);
 
             return Ok(result);
         }
