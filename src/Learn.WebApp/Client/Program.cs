@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,6 +19,12 @@ namespace Learn.WebApp.Client
             builder.Services.AddHttpClient<LearnClient>(client =>
             {
                 client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+            });
+
+            // add auto mapper services
+            builder.Services.AddAutoMapper(options =>
+            {
+                options.AddProfile<AutoMapperProfile>();
             });
 
             await builder.Build().RunAsync().ConfigureAwait(false);

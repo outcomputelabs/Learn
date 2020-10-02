@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[RemoveCoursePath]
+﻿CREATE PROCEDURE [dbo].[ClearCoursePath]
 	@Key UNIQUEIDENTIFIER,
 	@Version UNIQUEIDENTIFIER
 AS
@@ -6,21 +6,15 @@ AS
 SET NOCOUNT ON
 SET XACT_ABORT ON
 
-BEGIN TRANSACTION
-
 DELETE [dbo].[CoursePath]
+OUTPUT
+	[deleted].[Key],
+	[deleted].[Name],
+	[deleted].[Slug],
+	[deleted].[Version]
 WHERE
 	[Key] = @Key
 	AND [Version] = @Version
-
-SELECT
-	[Version]
-FROM
-	[dbo].[CoursePath]
-WHERE
-	[Key] = @Key
-
-COMMIT TRANSACTION
 
 RETURN 0
 GO

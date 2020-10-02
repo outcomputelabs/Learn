@@ -11,11 +11,11 @@ namespace Learn.WebApp.Server
         {
             // request models to business models
             CreateMap<WeatherForecastModel, WeatherForecast>();
-            CreateMap<CoursePathPostRequestModel, CoursePath>();
+            CreateMap<CoursePathModel, CoursePath>();
             CreateMap<CoursePathDeleteRequestModel, CoursePath>();
 
             // business models to response models
-            CreateMap<CoursePath, CoursePathResponseModel>();
+            CreateMap<CoursePath, CoursePathModel>();
         }
     }
 }

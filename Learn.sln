@@ -29,7 +29,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Learn.Server.Data.SqlServer
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5D382791-315F-40DF-833A-35111926C69C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.Server.Data.SqlServer.Tests", "test\Learn.Server.Data.SqlServer.Tests\Learn.Server.Data.SqlServer.Tests.csproj", "{4165399B-5C43-474A-9139-D066CFEC5F88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Learn.Server.Data.SqlServer.Tests", "test\Learn.Server.Data.SqlServer.Tests\Learn.Server.Data.SqlServer.Tests.csproj", "{4165399B-5C43-474A-9139-D066CFEC5F88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

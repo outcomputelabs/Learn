@@ -67,9 +67,8 @@
     <Build Include="Tables\CoursePath.sql" />
     <Build Include="Procedures\CoursePath\GetCoursePaths.sql" />
     <Build Include="Procedures\CoursePath\GetCoursePath.sql" />
-    <Build Include="Procedures\CoursePath\AddCoursePath.sql" />
-    <Build Include="Procedures\CoursePath\RemoveCoursePath.sql" />
-    <Build Include="Procedures\CoursePath\UpdateCoursePath.sql" />
+    <Build Include="Procedures\CoursePath\ClearCoursePath.sql" />
+    <Build Include="Procedures\CoursePath\SetCoursePath.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Learn.Server.Data.SqlServer.Database.publish.xml" />

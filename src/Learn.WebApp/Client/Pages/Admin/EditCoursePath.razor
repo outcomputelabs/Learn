@@ -1,0 +1,45 @@
+﻿@using System
+@page "/admin/edit-course-path/{key:guid}"
+@page "/admin/edit-course-path"
+@layout AdminLayout
+
+@if (Key.HasValue)
+{
+    <h3>@Resources.Title_EditCoursePath</h3>
+}
+else
+{
+    <h3>@Resources.Title_NewCoursePath</h3>
+}
+
+@if (Model is null)
+{
+    if (IsValid)
+    {
+        <Loading />
+    }
+    else
+    {
+        <div class="alert alert-primary" role="alert">
+            @Resources.Message_ThisCoursePathDoesNotExist
+        </div>
+    }
+}
+else
+{
+    <EditForm Model="@Model" OnValidSubmit="@HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <input type="hidden" @bind-value="Model.Key" />
+        <input type="hidden" @bind-value="Model.Version" />
+        <div class="form-group">
+            <label>@Resources.Label_CoursePath_Name:</label>
+            <InputText class="form-control" @bind-Value="Model.Name"></InputText>
+        </div>
+        <div class="form-group">
+            <label>@Resources.Label_CoursePath_Slug:</label>
+            <InputText class="form-control" @bind-Value="Model.Slug"></InputText>
+        </div>
+        <button type="submit" class="btn btn-primary">@Resources.Button_Save</button>
+    </EditForm>
+}

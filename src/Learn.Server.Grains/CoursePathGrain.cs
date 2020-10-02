@@ -34,36 +34,22 @@ namespace Learn.Server.Grains
 
         public Task<CoursePath> SetAsync(CoursePath entity)
         {
+            // validation
             if (entity is null) throw new ArgumentNullException(nameof(entity));
             if (entity.Key != _key) throw new InvalidOperationException();
+
+            // preempt the concurrency exception to avoid hitting the database
+            if (entity.Version != Guid.Empty)
+            {
+                throw new ConcurrencyException(null, entity.Version);
+            }
 
             return InnerSetAsync(entity);
         }
 
         private async Task<CoursePath> InnerSetAsync(CoursePath entity)
         {
-            if (_entity is null)
-            {
-                // preempt the concurrency exception to avoid hitting the database
-                if (entity.Version != Guid.Empty)
-                {
-                    throw new ConcurrencyException(null, entity.Version);
-                }
-
-                _entity = await _repository.AddAsync(entity).ConfigureAwait(true);
-            }
-            else
-            {
-                // preempt the concurrency exception to avoid hitting the database
-                if (entity.Version != _entity.Version)
-                {
-                    throw new ConcurrencyException(_entity.Version, entity.Version);
-                }
-
-                _entity = await _repository.UpdateAsync(entity).ConfigureAwait(true);
-            }
-
-            return _entity;
+            return await _repository.SetAsync(entity).ConfigureAwait(true);
         }
 
         public async Task ClearAsync(Guid version)
@@ -78,7 +64,7 @@ namespace Learn.Server.Grains
             }
 
             // attempt to delete from the database
-            await _repository.RemoveAsync(_entity.Key, version).ConfigureAwait(true);
+            await _repository.ClearAsync(_entity.Key, version).ConfigureAwait(true);
 
             // also clear from cache
             _entity = null;

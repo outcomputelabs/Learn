@@ -115,7 +115,7 @@ namespace Learn.Server.Data.SqlServer.Tests
         }
 
         [Fact]
-        public async Task AddAsyncAddsNewItem()
+        public async Task SetAsyncAddsNewItem()
         {
             // arrange
             using var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
@@ -123,7 +123,7 @@ namespace Learn.Server.Data.SqlServer.Tests
 
             // act
             var repository = new CoursePathRepository(_database.SqlServerRepositoryOptions);
-            var result = await repository.AddAsync(item).ConfigureAwait(false);
+            var result = await repository.SetAsync(item).ConfigureAwait(false);
 
             // assert
             using var connection = new SqlConnection(_database.ConnectionString);
@@ -146,7 +146,7 @@ namespace Learn.Server.Data.SqlServer.Tests
         }
 
         [Fact]
-        public async Task AddAsyncThrowsOnExistingId()
+        public async Task SetAsyncThrowsOnExistingId()
         {
             // arrange
             using var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
@@ -159,14 +159,14 @@ namespace Learn.Server.Data.SqlServer.Tests
 
             // act
             var repository = new CoursePathRepository(_database.SqlServerRepositoryOptions);
-            var ex = await Assert.ThrowsAsync<KeyAlreadyExistsException>(() => repository.AddAsync(item)).ConfigureAwait(false);
+            var ex = await Assert.ThrowsAsync<KeyAlreadyExistsException>(() => repository.SetAsync(item)).ConfigureAwait(false);
 
             // assert
             Assert.Equal(item.Key, ex.Key);
         }
 
         [Fact]
-        public async Task AddAsyncThrowsOnExistingName()
+        public async Task SetAsyncThrowsOnExistingName()
         {
             // arrange
             using var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
@@ -180,14 +180,14 @@ namespace Learn.Server.Data.SqlServer.Tests
             // act
             var item = new CoursePath(Guid.NewGuid(), existing.Name, Guid.NewGuid().ToString(), Guid.NewGuid());
             var repository = new CoursePathRepository(_database.SqlServerRepositoryOptions);
-            var ex = await Assert.ThrowsAsync<NameAlreadyExistsException>(() => repository.AddAsync(item)).ConfigureAwait(false);
+            var ex = await Assert.ThrowsAsync<NameAlreadyExistsException>(() => repository.SetAsync(item)).ConfigureAwait(false);
 
             // assert
             Assert.Equal(existing.Name, ex.Name);
         }
 
         [Fact]
-        public async Task AddAsyncThrowsOnExistingSlug()
+        public async Task SetAsyncThrowsOnExistingSlug()
         {
             // arrange
             using var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
@@ -201,14 +201,14 @@ namespace Learn.Server.Data.SqlServer.Tests
             // act
             var item = new CoursePath(Guid.NewGuid(), Guid.NewGuid().ToString(), existing.Slug, Guid.NewGuid());
             var repository = new CoursePathRepository(_database.SqlServerRepositoryOptions);
-            var ex = await Assert.ThrowsAsync<SlugAlreadyExistsException>(() => repository.AddAsync(item)).ConfigureAwait(false);
+            var ex = await Assert.ThrowsAsync<SlugAlreadyExistsException>(() => repository.SetAsync(item)).ConfigureAwait(false);
 
             // assert
             Assert.Equal(existing.Slug, ex.Slug);
         }
 
         [Fact]
-        public async Task RemoveAsyncRemovesExistingItem()
+        public async Task ClearAsyncRemovesExistingItem()
         {
             // arrange
             using (new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
@@ -221,7 +221,7 @@ namespace Learn.Server.Data.SqlServer.Tests
 
                 // act
                 var repository = new CoursePathRepository(_database.SqlServerRepositoryOptions);
-                await repository.RemoveAsync(item.Key, item.Version).ConfigureAwait(false);
+                await repository.ClearAsync(item.Key, item.Version).ConfigureAwait(false);
 
                 // assert
                 using (var connection = new SqlConnection(_database.ConnectionString))
@@ -233,7 +233,7 @@ namespace Learn.Server.Data.SqlServer.Tests
         }
 
         [Fact]
-        public async Task RemoveAsyncThrowsOnVersionMismatch()
+        public async Task ClearAsyncThrowsOnVersionMismatch()
         {
             // arrange
             using (new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
@@ -247,7 +247,7 @@ namespace Learn.Server.Data.SqlServer.Tests
                 // act
                 var repository = new CoursePathRepository(_database.SqlServerRepositoryOptions);
                 var item = existing.WithVersion(Guid.NewGuid());
-                var ex = await Assert.ThrowsAsync<ConcurrencyException>(() => repository.RemoveAsync(item.Key, item.Version)).ConfigureAwait(false);
+                var ex = await Assert.ThrowsAsync<ConcurrencyException>(() => repository.ClearAsync(item.Key, item.Version)).ConfigureAwait(false);
 
                 // assert
                 Assert.Equal(existing.Version, ex.StoredVersion);
@@ -256,7 +256,7 @@ namespace Learn.Server.Data.SqlServer.Tests
         }
 
         [Fact]
-        public async Task RemoveAsyncIgnoresMissingItem()
+        public async Task ClearAsyncIgnoresMissingItem()
         {
             // arrange
             using (new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
@@ -266,7 +266,7 @@ namespace Learn.Server.Data.SqlServer.Tests
                 var repository = new CoursePathRepository(_database.SqlServerRepositoryOptions);
 
                 // act
-                await repository.RemoveAsync(item.Key, item.Version).ConfigureAwait(false);
+                await repository.ClearAsync(item.Key, item.Version).ConfigureAwait(false);
 
                 // assert
                 Assert.True(true);
@@ -274,7 +274,7 @@ namespace Learn.Server.Data.SqlServer.Tests
         }
 
         [Fact]
-        public async Task UpdateAsyncUpdatesExistingItem()
+        public async Task SetAsyncUpdatesExistingItem()
         {
             // arrange
             using (new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
@@ -289,7 +289,7 @@ namespace Learn.Server.Data.SqlServer.Tests
                 var repository = new CoursePathRepository(_database.SqlServerRepositoryOptions);
                 var current = await repository.GetAsync(item.Key).ConfigureAwait(false);
                 var proposed = new CoursePath(current.Key, Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), current.Version);
-                var saved = await repository.UpdateAsync(proposed).ConfigureAwait(false);
+                var saved = await repository.SetAsync(proposed).ConfigureAwait(false);
 
                 // assert
                 using (var connection = new SqlConnection(_database.ConnectionString))
@@ -308,68 +308,6 @@ namespace Learn.Server.Data.SqlServer.Tests
                     Assert.Equal(proposed.Slug, saved.Slug);
                     Assert.NotEqual(proposed.Version, saved.Version);
                 }
-            }
-        }
-
-        [Fact]
-        public async Task UpdateAsyncThrowsOnExistingName()
-        {
-            // arrange
-            using (new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                var items = new[]
-                {
-                    new CoursePath(Guid.NewGuid(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid()),
-                    new CoursePath(Guid.NewGuid(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid())
-                };
-
-                using (var connection = new SqlConnection(_database.ConnectionString))
-                {
-                    foreach (var item in items)
-                    {
-                        await connection.ExecuteAsync("INSERT INTO [dbo].[CoursePath] ([Key], [Name], [Slug], [Version]) VALUES (@Key, @Name, @Slug, @Version)", item).ConfigureAwait(false);
-                    }
-                }
-
-                // act
-                var repository = new CoursePathRepository(_database.SqlServerRepositoryOptions);
-                var current = await repository.GetAsync(items[0].Key).ConfigureAwait(false);
-                var proposed = new CoursePath(current.Key, items[1].Name, Guid.NewGuid().ToString(), current.Version);
-                var ex = await Assert.ThrowsAsync<NameAlreadyExistsException>(() => repository.UpdateAsync(proposed)).ConfigureAwait(false);
-
-                // assert
-                Assert.Equal(items[1].Name, ex.Name);
-            }
-        }
-
-        [Fact]
-        public async Task UpdateAsyncThrowsOnExistingSlug()
-        {
-            // arrange
-            using (new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                var items = new[]
-                {
-                    new CoursePath(Guid.NewGuid(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid()),
-                    new CoursePath(Guid.NewGuid(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid())
-                };
-
-                using (var connection = new SqlConnection(_database.ConnectionString))
-                {
-                    foreach (var item in items)
-                    {
-                        await connection.ExecuteAsync("INSERT INTO [dbo].[CoursePath] ([Key], [Name], [Slug], [Version]) VALUES (@Key, @Name, @Slug, @Version)", item).ConfigureAwait(false);
-                    }
-                }
-
-                // act
-                var repository = new CoursePathRepository(_database.SqlServerRepositoryOptions);
-                var current = await repository.GetAsync(items[0].Key).ConfigureAwait(false);
-                var proposed = new CoursePath(current.Key, Guid.NewGuid().ToString(), items[1].Slug, current.Version);
-                var ex = await Assert.ThrowsAsync<SlugAlreadyExistsException>(() => repository.UpdateAsync(proposed)).ConfigureAwait(false);
-
-                // assert
-                Assert.Equal(items[1].Slug, ex.Slug);
             }
         }
     }

@@ -7,12 +7,9 @@ using Learn.WebApp.Shared.CoursePath;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Orleans;
-using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Learn.WebApp.Server.Controllers
@@ -35,15 +32,15 @@ namespace Learn.WebApp.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CoursePathResponseModel>>> GetAllAsync(CancellationToken cancellationToken)
+        public async Task<ActionResult<IEnumerable<CoursePathModel>>> GetAllAsync()
         {
-            var result = await _repository.GetAllAsync(cancellationToken).ConfigureAwait(false);
+            var result = await _repository.GetAllAsync().ConfigureAwait(false);
 
-            return Ok(_mapper.Map<IEnumerable<CoursePathResponseModel>>(result));
+            return Ok(_mapper.Map<IEnumerable<CoursePathModel>>(result));
         }
 
         [HttpGet("{key}")]
-        public async Task<ActionResult<CoursePathResponseModel>> GetAsync([FromRoute, Required] Guid key)
+        public async Task<ActionResult<CoursePathModel>> GetAsync([FromRoute, Required] Guid key)
         {
             // get the cached entity
             var result = await _factory.GetCoursePathGrain(key).GetAsync().ConfigureAwait(false);
@@ -52,29 +49,22 @@ namespace Learn.WebApp.Server.Controllers
             if (result is null) return NotFound();
 
             // the entity exists
-            return Ok(_mapper.Map<CoursePathResponseModel>(result));
+            return Ok(_mapper.Map<CoursePathModel>(result));
         }
 
-        [HttpPost]
-        [SwaggerResponse(409, Type = typeof(ConflictApiResponseModel))]
-        public async Task<ActionResult<CoursePathResponseModel>> PostAsync([FromBody, Required, DisallowNull] CoursePathPostRequestModel input)
+        [HttpPut("{key}")]
+        public async Task<ActionResult<CoursePathModel>> PostAsync([Required] CoursePathModel model)
         {
             // to keep the compiler happy
-            if (input is null) return BadRequest();
-
-            // generate a new key for a new entry
-            if (!input.Key.HasValue)
-            {
-                input.Key = Guid.NewGuid();
-            }
+            if (model is null) return BadRequest();
 
             // attempt to set the entry
             CoursePath result;
             try
             {
                 result = await _factory
-                    .GetCoursePathGrain(input.Key.Value)
-                    .SetAsync(_mapper.Map<CoursePath>(input))
+                    .GetCoursePathGrain(model.Key)
+                    .SetAsync(_mapper.Map<CoursePath>(model))
                     .ConfigureAwait(false);
             }
             catch (ConcurrencyException ex)
@@ -96,7 +86,7 @@ namespace Learn.WebApp.Server.Controllers
                 {
                     NameConflict = new NameConflictApiResponseModel
                     {
-                        Key = input.Key.Value,
+                        Key = model.Key,
                         Name = ex.Name
                     }
                 });
@@ -108,17 +98,16 @@ namespace Learn.WebApp.Server.Controllers
                 {
                     SlugConflict = new SlugConflictApiResponseModel
                     {
-                        Key = input.Key.Value,
+                        Key = model.Key,
                         Slug = ex.Slug
                     }
                 });
             }
 
-            return Ok(_mapper.Map<CoursePathResponseModel>(result));
+            return Ok(_mapper.Map<CoursePathModel>(result));
         }
 
         [HttpDelete]
-        [SwaggerResponse(409, Type = typeof(ConflictApiResponseModel))]
         public async Task<ActionResult> DeleteAsync([FromBody, Required] CoursePathDeleteRequestModel model)
         {
             // just to keep the compiler happy

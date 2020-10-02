@@ -16,19 +16,8 @@ namespace Learn.WebApp.Client
             _client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
-        public async Task<IEnumerable<CoursePathResponseModel>> GetCoursePathsAsync()
-        {
-            try
-            {
-                return await _client
-                    .GetFromJsonAsync<IEnumerable<CoursePathResponseModel>>("CoursePath")
-                    .ConfigureAwait(false);
-            }
-            catch (NotSupportedException ex)
-            {
-                /* todo */
-                throw;
-            }
-        }
+        public Task<IEnumerable<CoursePathModel>> GetCoursePathsAsync() => _client.GetFromJsonAsync<IEnumerable<CoursePathModel>>("CoursePath");
+
+        public Task<CoursePathModel?> GetCoursePathAsync(Guid key) => _client.GetFromJsonAsync<CoursePathModel?>($"CoursePath/{key:N}");
     }
 }

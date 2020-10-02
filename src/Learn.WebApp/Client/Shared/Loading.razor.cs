@@ -1,6 +1,6 @@
 ﻿namespace Learn.WebApp.Client.Shared
 {
-    public partial class NavMenu
+    public partial class Loading
     {
     }
 }
