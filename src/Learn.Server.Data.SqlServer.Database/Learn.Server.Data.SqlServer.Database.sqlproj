@@ -71,7 +71,9 @@
     <Build Include="Procedures\CoursePath\SetCoursePath.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Learn.Server.Data.SqlServer.Database.publish.xml" />
+    <None Include="Learn.Server.Data.SqlServer.Database.publish.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Learn.Server.Data.SqlServer.Database.refactorlog" />
