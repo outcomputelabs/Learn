@@ -37,11 +37,10 @@ steps:
     command: 'restore'
     feedsToUse: 'select'
 
-- task: DotNetCoreCLI@2
-  displayName: "Build"
+- task: MSBuild@1
   inputs:
-    command: 'build'
-    arguments: '--no-restore --configuration $(buildConfiguration)'
+    solution: '**/*.sln'
+    configuration: '$(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: "Test"
