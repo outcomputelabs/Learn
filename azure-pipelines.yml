@@ -42,6 +42,13 @@ steps:
     solution: '**/*.sln'
     configuration: '$(buildConfiguration)'
 
+- task: SqlDacpacDeploymentOnMachineGroup@0
+  inputs:
+    TaskType: 'dacpac'
+    DacpacFile: '$(Build.SourcesDirectory)/src/Learn.Server.Data.SqlServer.Database/bin/$(buildConfiguration)/Learn.Server.Data.SqlServer.Database.dacpac'
+    TargetMethod: 'publishProfile'
+    PublishProfile: '$(Build.SourcesDirectory)/src/Learn.Server.Data.SqlServer.Database/bin/$(buildConfiguration)/Learn.Server.Data.SqlServer.Database.publish.xml'
+
 - task: DotNetCoreCLI@2
   displayName: "Test"
   inputs:
