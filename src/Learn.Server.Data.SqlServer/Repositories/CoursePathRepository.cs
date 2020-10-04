@@ -88,7 +88,7 @@ namespace Learn.Server.Data.SqlServer.Repositories
             await using var connection = CreateConnection();
 
             var result = await connection
-                .QueryAsync("[dbo].[ClearCoursePath]", new { key, version }, default, default, CommandType.StoredProcedure)
+                .QuerySingleOrDefaultAsync<CoursePath>("[dbo].[ClearCoursePath]", new { key, version }, default, default, CommandType.StoredProcedure)
                 .ConfigureAwait(false);
 
             if (result is null)

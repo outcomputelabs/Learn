@@ -21,4 +21,46 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="[SetCoursePath]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="44b3273c-9ac5-40c3-ace2-e0961543c81d" ChangeDateTime="10/03/2020 15:00:56">
+    <Property Name="ElementName" Value="[Audit].[AuditEvent]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[Audit]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[AuditType]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6a87474d-ce02-4d8a-ba10-027d890bafb1" ChangeDateTime="10/03/2020 15:01:06">
+    <Property Name="ElementName" Value="[Audit].[PK_AuditEvent]" />
+    <Property Name="ElementType" Value="SqlPrimaryKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Audit].[AuditType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PK_AuditType]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9327617b-ca25-403c-824d-c9f879469edf" ChangeDateTime="10/03/2020 15:01:26">
+    <Property Name="ElementName" Value="[Audit].[UK_AuditEvent_Name]" />
+    <Property Name="ElementType" Value="SqlUniqueConstraint" />
+    <Property Name="ParentElementName" Value="[Audit].[AuditType]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[UK_AuditType_Name]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="836ed9da-d488-441f-8daf-741e37f426f0" ChangeDateTime="10/03/2020 15:02:32">
+    <Property Name="ElementName" Value="[Audit].[CoursePath].[AuditEventKey]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Audit].[CoursePath]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[AuditTypeKey]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3a8100ed-0b43-4647-b04b-7a0fc0e21d0c" ChangeDateTime="10/03/2020 15:02:41">
+    <Property Name="ElementName" Value="[Audit].[CoursePath].[AuditEventDate]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[Audit].[CoursePath]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[AuditDate]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6ff2ad12-5c93-4b25-8cbc-f6870015845e" ChangeDateTime="10/03/2020 15:02:57">
+    <Property Name="ElementName" Value="[Audit].[FK_AuditEvent]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Audit].[CoursePath]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_AuditType]" />
+  </Operation>
 </Operations>

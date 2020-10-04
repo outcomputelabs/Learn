@@ -62,6 +62,9 @@
     <Folder Include="Tables" />
     <Folder Include="Procedures" />
     <Folder Include="Procedures\CoursePath" />
+    <Folder Include="Tables\Audit" />
+    <Folder Include="Schemas" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\CoursePath.sql" />
@@ -69,6 +72,9 @@
     <Build Include="Procedures\CoursePath\GetCoursePath.sql" />
     <Build Include="Procedures\CoursePath\ClearCoursePath.sql" />
     <Build Include="Procedures\CoursePath\SetCoursePath.sql" />
+    <Build Include="Tables\Audit\CoursePath.sql" />
+    <Build Include="Schemas\Audit.sql" />
+    <Build Include="Tables\Audit\AuditType.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Learn.Server.Data.SqlServer.Database.publish.xml">
@@ -77,5 +83,9 @@
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Learn.Server.Data.SqlServer.Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
+    <None Include="Scripts\Script.PostDeployment.Seed.Audit.AuditType.sql" />
   </ItemGroup>
 </Project>
