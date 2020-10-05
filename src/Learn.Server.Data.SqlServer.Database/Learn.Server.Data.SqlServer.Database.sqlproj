@@ -65,6 +65,7 @@
     <Folder Include="Tables\Audit" />
     <Folder Include="Schemas" />
     <Folder Include="Scripts" />
+    <Folder Include="Tables\Identity" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\CoursePath.sql" />
@@ -75,6 +76,16 @@
     <Build Include="Tables\Audit\CoursePath.sql" />
     <Build Include="Schemas\Audit.sql" />
     <Build Include="Tables\Audit\AuditType.sql" />
+    <Build Include="Schemas\Identity.sql" />
+    <Build Include="Tables\Identity\Role.sql" />
+    <Build Include="Tables\Identity\User.sql" />
+    <Build Include="Tables\Identity\DeviceCode.sql" />
+    <Build Include="Tables\Identity\PersistedGrant.sql" />
+    <Build Include="Tables\Identity\RoleClaim.sql" />
+    <Build Include="Tables\Identity\UserClaim.sql" />
+    <Build Include="Tables\Identity\UserLogin.sql" />
+    <Build Include="Tables\Identity\UserRole.sql" />
+    <Build Include="Tables\Identity\UserToken.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Learn.Server.Data.SqlServer.Database.publish.xml">
