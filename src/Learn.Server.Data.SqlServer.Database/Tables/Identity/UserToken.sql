@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [Identity].[UserToken]
 (
-    [UserId] NVARCHAR(255) NOT NULL,
+    [UserId] INT NOT NULL,
     [LoginProvider] NVARCHAR(255) NOT NULL,
     [Name] NVARCHAR(255) NOT NULL,
     [Value] NVARCHAR(255) NOT NULL,

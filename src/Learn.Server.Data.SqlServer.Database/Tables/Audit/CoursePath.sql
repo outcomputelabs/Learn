@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [Audit].[CoursePath]
 (
-	[AuditKey] INT NOT NULL,
-	[AuditTypeKey] INT NOT NULL,
-	[AuditDate] DATETIMEOFFSET NOT NULL,
+	[AuditId] INT NOT NULL,
+	[AuditTypeId] INT NOT NULL,
+	[AuditTimestamp] DATETIMEOFFSET NOT NULL,
 
 	[Key] UNIQUEIDENTIFIER NOT NULL,
 	[Name] NVARCHAR(1000) NOT NULL,
@@ -11,16 +11,16 @@
 
 	CONSTRAINT [PK_Audit_CoursePath] PRIMARY KEY CLUSTERED
 	(
-		[AuditKey]
+		[AuditId]
 	),
 
 	CONSTRAINT [FK_AuditType] FOREIGN KEY
 	(
-		[AuditTypeKey]
+		[AuditTypeId]
 	)
 	REFERENCES [Audit].[AuditType]
 	(
-		[Key]
+		[Id]
 	)
 )
 GO
@@ -28,7 +28,7 @@ GO
 CREATE UNIQUE NONCLUSTERED INDEX [NCI_Audit_CoursePath]
 ON [Audit].[CoursePath]
 (
-	[AuditKey]
+	[AuditId]
 )
 GO
 

@@ -1,13 +1,19 @@
 ﻿CREATE TABLE [Identity].[Role]
 (
-	[Id] NVARCHAR(255) NOT NULL,
+	[Id] INT NOT NULL,
 	[Name] NVARCHAR(255) NOT NULL,
     [NormalizedName] NVARCHAR(255) NOT NULL,
-    [ConcurrencyStamp] NVARCHAR(255) NOT NULL,
+    [ConcurrencyStamp] UNIQUEIDENTIFIER NOT NULL,
 
 	CONSTRAINT [PK_Role] PRIMARY KEY CLUSTERED
 	(
 		[Id]
 	)
 )
+GO
+
+CREATE SEQUENCE [Identity].[RoleSequence]
+AS INT
+START WITH 1
+INCREMENT BY 1
 GO

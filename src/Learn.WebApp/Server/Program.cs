@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Learn.Server.Data.SqlServer.Identity.Models;
 using Learn.WebApp.Server.Middleware;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +38,7 @@ namespace Learn.WebApp.Server
 
                         logging.ClearProviders();
                         logging.AddSerilog(logger, true);
-                    }); 
+                    });
 
                     webBuilder.ConfigureServices((context, services) =>
                     {
@@ -66,6 +68,14 @@ namespace Learn.WebApp.Server
                         {
                             options.ConnectionString = context.Configuration.GetConnectionString("Learn");
                         });
+
+                        // add identity services
+                        services.AddDefaultIdentity<IdentityUser>(options =>
+                        {
+                            options.SignIn.RequireConfirmedAccount = true;
+                        });
+                        services.AddIdentityServer();
+                        services.AddAuthentication().AddIdentityServerJwt();
                     });
 
                     webBuilder.Configure((context, app) =>
@@ -89,6 +99,12 @@ namespace Learn.WebApp.Server
                         app.UseBlazorFrameworkFiles();
                         app.UseStaticFiles();
 
+                        app.UseRouting();
+
+                        app.UseIdentityServer();
+                        app.UseAuthentication();
+                        app.UseAuthorization();
+
                         app.UseSwagger();
                         app.UseSwaggerUI(options =>
                         {
@@ -97,7 +113,6 @@ namespace Learn.WebApp.Server
 
                         app.UseMiddleware<ActivityMiddleware>();
 
-                        app.UseRouting();
                         app.UseEndpoints(endpoints =>
                         {
                             endpoints.MapRazorPages();

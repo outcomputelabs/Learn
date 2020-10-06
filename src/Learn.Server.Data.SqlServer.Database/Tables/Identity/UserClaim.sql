@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [Identity].[UserClaim]
 (
     [Id] INT NOT NULL,
-    [UserId] NVARCHAR(255) NOT NULL,
+    [UserId] INT NOT NULL,
     [ClaimType] NVARCHAR(255) NOT NULL,
     [ClaimValue] NVARCHAR(255) NOT NULL,
 

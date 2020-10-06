@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [Identity].[UserRole]
 (
-	[UserId] NVARCHAR(255) NOT NULL,
-	[RoleId] NVARCHAR(255) NOT NULL,
+	[UserId] INT NOT NULL,
+	[RoleId] INT NOT NULL,
 
 	CONSTRAINT [PK_UserRole] PRIMARY KEY CLUSTERED
 	(
