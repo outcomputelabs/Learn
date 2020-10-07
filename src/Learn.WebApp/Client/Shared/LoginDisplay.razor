@@ -1,0 +1,13 @@
+﻿@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager;
+
+<AuthorizeView>
+    <Authorized>
+        <a ref="authentication/profile">Hello, @context.User.Identity.Name!</a>
+        <button class="nav-link btn btn-link" @onclick="BeginSignOutAsync">Sign Out</button>
+    </Authorized>
+    <NotAuthorized>
+        <a href="authentication/register">Register</a>
+        <a href="authentication/login">Log In</a>
+    </NotAuthorized>
+</AuthorizeView>

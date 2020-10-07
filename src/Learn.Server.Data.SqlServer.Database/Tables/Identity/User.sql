@@ -12,7 +12,7 @@
     [PhoneNumber] NVARCHAR(255) NOT NULL,
     [PhoneNumberConfirmed] BIT NOT NULL,
     [TwoFactorEnabled] BIT NOT NULL,
-    [LockoutEnd] DATETIMEOFFSET NOT NULL,
+    [LockoutEnd] DATETIMEOFFSET NULL,
     [LockoutEnabled] BIT NOT NULL,
     [AccessFailedCount] INT NOT NULL,
 

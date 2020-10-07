@@ -10,12 +10,12 @@ namespace Learn.WebApp.Server
         public AutoMapperProfile()
         {
             // request models to business models
-            CreateMap<WeatherForecastModel, WeatherForecast>();
             CreateMap<CoursePathModel, CoursePath>();
             CreateMap<CoursePathDeleteRequestModel, CoursePath>();
 
             // business models to response models
             CreateMap<CoursePath, CoursePathModel>();
+            CreateMap<WeatherForecast, WeatherForecastModel>();
         }
     }
 }

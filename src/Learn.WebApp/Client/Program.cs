@@ -1,8 +1,8 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Learn.WebApp.Client
@@ -14,12 +14,16 @@ namespace Learn.WebApp.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            // add spa authentication support
+            builder.Services.AddApiAuthorization();
 
-            builder.Services.AddHttpClient<LearnClient>(client =>
-            {
-                client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
-            });
+            // add the named http client that adds access token to requests
+            builder.Services
+                .AddHttpClient<LearnClient>(client =>
+                {
+                    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+                })
+                .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
             // add auto mapper services
             builder.Services.AddAutoMapper(options =>

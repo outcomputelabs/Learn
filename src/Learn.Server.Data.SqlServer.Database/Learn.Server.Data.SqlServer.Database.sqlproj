@@ -67,6 +67,7 @@
     <Folder Include="Scripts" />
     <Folder Include="Tables\Identity" />
     <Folder Include="Procedures\Identity" />
+    <Folder Include="Procedures\Identity\User" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\CoursePath.sql" />
@@ -87,8 +88,12 @@
     <Build Include="Tables\Identity\UserLogin.sql" />
     <Build Include="Tables\Identity\UserRole.sql" />
     <Build Include="Tables\Identity\UserToken.sql" />
-    <Build Include="Procedures\Identity\CreateUser.sql" />
     <Build Include="Tables\Audit\UserAudit.sql" />
+    <Build Include="Procedures\Identity\User\CreateUser.sql" />
+    <Build Include="Procedures\Identity\User\DeleteUser.sql" />
+    <Build Include="Procedures\Identity\User\FindUserById.sql" />
+    <Build Include="Procedures\Identity\User\FindUserByNormalizedUserName.sql" />
+    <Build Include="Procedures\Identity\User\UpdateUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Learn.Server.Data.SqlServer.Database.publish.xml">

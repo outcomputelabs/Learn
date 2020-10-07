@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using Learn.Server.Data.SqlServer.Identity.Models;
+using Learn.Server.Data;
+using Learn.Server.Data.SqlServer;
 using Learn.WebApp.Server.Middleware;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -70,12 +71,20 @@ namespace Learn.WebApp.Server
                         });
 
                         // add identity services
-                        services.AddDefaultIdentity<IdentityUser>(options =>
-                        {
-                            options.SignIn.RequireConfirmedAccount = true;
-                        });
-                        services.AddIdentityServer();
-                        services.AddAuthentication().AddIdentityServerJwt();
+                        services
+                            .AddDefaultIdentity<ApplicationUser>(options =>
+                            {
+                                options.SignIn.RequireConfirmedAccount = true;
+                            })
+                            .AddEntityFrameworkStores<ApplicationDbContext>();
+
+                        services
+                            .AddIdentityServer()
+                            .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+
+                        services
+                            .AddAuthentication()
+                            .AddIdentityServerJwt();
                     });
 
                     webBuilder.Configure((context, app) =>
@@ -85,6 +94,7 @@ namespace Learn.WebApp.Server
                         if (env.IsDevelopment())
                         {
                             app.UseDeveloperExceptionPage();
+                            app.UseDatabaseErrorPage();
                             app.UseWebAssemblyDebugging();
                         }
                         else
