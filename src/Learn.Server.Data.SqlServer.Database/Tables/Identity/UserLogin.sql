@@ -3,7 +3,7 @@
     [LoginProvider] NVARCHAR(255) NOT NULL,
     [ProviderKey] NVARCHAR(255) NOT NULL,
     [ProviderDisplayName] NVARCHAR(255) NOT NULL,
-    [UserId] INT NOT NULL,
+    [UserId] UNIQUEIDENTIFIER NOT NULL,
 
     CONSTRAINT [PK_UserLogin] PRIMARY KEY CLUSTERED
     (
@@ -15,7 +15,7 @@
     (
         [UserId]
     )
-    REFERENCES [Identity].[User]
+    REFERENCES [Identity].[AspNetUsers]
     (
         [Id]
     )

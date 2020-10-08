@@ -1,15 +1,15 @@
-﻿CREATE TABLE [Identity].[User]
+﻿CREATE TABLE [Identity].[AspNetUsers]
 (
-	[Id] INT NOT NULL,
-    [UserName] NVARCHAR(255) NOT NULL,
-    [NormalizedUserName] NVARCHAR(255) NOT NULL,
-    [Email] NVARCHAR(255) NOT NULL,
-    [NormalizedEmail] NVARCHAR(255) NOT NULL,
+	[Id] UNIQUEIDENTIFIER NOT NULL,
+    [UserName] NVARCHAR(256) NOT NULL,
+    [NormalizedUserName] NVARCHAR(256) NOT NULL,
+    [Email] NVARCHAR(256) NOT NULL,
+    [NormalizedEmail] NVARCHAR(256) NOT NULL,
     [EmailConfirmed] BIT NOT NULL,
-    [PasswordHash] NVARCHAR(255) NOT NULL,
-    [SecurityStamp] UNIQUEIDENTIFIER NOT NULL,
+    [PasswordHash] NVARCHAR(256) NOT NULL,
+    [SecurityStamp] NVARCHAR(256) NOT NULL,
     [ConcurrencyStamp] UNIQUEIDENTIFIER NOT NULL,
-    [PhoneNumber] NVARCHAR(255) NOT NULL,
+    [PhoneNumber] NVARCHAR(256) NULL,
     [PhoneNumberConfirmed] BIT NOT NULL,
     [TwoFactorEnabled] BIT NOT NULL,
     [LockoutEnd] DATETIMEOFFSET NULL,
@@ -31,10 +31,4 @@
         [NormalizedEmail]
     )
 )
-GO
-
-CREATE SEQUENCE [Identity].[UserSequence]
-AS INT
-START WITH 1
-INCREMENT BY 1
 GO

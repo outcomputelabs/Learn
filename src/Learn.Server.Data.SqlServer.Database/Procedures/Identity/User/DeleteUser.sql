@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [Identity].[DeleteUser]
-    @Id INT,
+    @Id UNIQUEIDENTIFIER,
     @ConcurrencyStamp UNIQUEIDENTIFIER
 AS
 
@@ -10,7 +10,7 @@ DECLARE @AuditId INT = NEXT VALUE FOR [Audit].[UserAuditSequence];
 DECLARE @AuditTypeId INT = (SELECT [Id] FROM [Audit].[AuditType] WHERE [Name] = 'DELETED');
 DECLARE @AuditTimestamp DATETIMEOFFSET = SYSDATETIMEOFFSET();
 
-DELETE [Identity].[User]
+DELETE [Identity].[AspNetUsers]
 
 OUTPUT
     

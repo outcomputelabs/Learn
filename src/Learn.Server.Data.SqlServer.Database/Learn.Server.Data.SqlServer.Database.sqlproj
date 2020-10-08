@@ -80,7 +80,7 @@
     <Build Include="Tables\Audit\AuditType.sql" />
     <Build Include="Schemas\Identity.sql" />
     <Build Include="Tables\Identity\Role.sql" />
-    <Build Include="Tables\Identity\User.sql" />
+    <Build Include="Tables\Identity\AspNetUsers.sql" />
     <Build Include="Tables\Identity\DeviceCode.sql" />
     <Build Include="Tables\Identity\PersistedGrant.sql" />
     <Build Include="Tables\Identity\RoleClaim.sql" />

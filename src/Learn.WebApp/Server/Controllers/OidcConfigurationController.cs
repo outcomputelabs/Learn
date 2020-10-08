@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
@@ -10,12 +9,10 @@ namespace Learn.WebApp.Server.Controllers
     [Route("_configuration")]
     public class OidcConfigurationController : Controller
     {
-        private readonly ILogger _logger;
         private readonly IClientRequestParametersProvider _provider;
 
-        public OidcConfigurationController(ILogger<OidcConfigurationController> logger, IClientRequestParametersProvider provider)
+        public OidcConfigurationController(IClientRequestParametersProvider provider)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _provider = provider ?? throw new ArgumentNullException(nameof(provider));
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System;
 
 namespace Learn.Server.Data.SqlServer
 {
@@ -9,6 +10,16 @@ namespace Learn.Server.Data.SqlServer
     {
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            if (builder is null) throw new ArgumentNullException(nameof(builder));
+
+            base.OnModelCreating(builder);
+
+            builder.Entity<ApplicationUser>().Property(x => x.Id).HasConversion<StringToGuidValueConverter>();
+            builder.Entity<ApplicationUser>().Property(x => x.ConcurrencyStamp).HasConversion<StringToGuidValueConverter>();
         }
     }
 }

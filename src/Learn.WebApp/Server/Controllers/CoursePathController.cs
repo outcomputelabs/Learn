@@ -5,7 +5,6 @@ using Learn.Server.Shared;
 using Learn.WebApp.Shared.Conflict;
 using Learn.WebApp.Shared.CoursePath;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Orleans;
 using System;
 using System.Collections.Generic;
@@ -18,14 +17,12 @@ namespace Learn.WebApp.Server.Controllers
     [Route("[controller]")]
     public class CoursePathController : ControllerBase
     {
-        private readonly ILogger _logger;
         private readonly ICoursePathRepository _repository;
         private readonly IGrainFactory _factory;
         private readonly IMapper _mapper;
 
-        public CoursePathController(ILogger<CoursePathController> logger, ICoursePathRepository repository, IGrainFactory factory, IMapper mapper)
+        public CoursePathController(ICoursePathRepository repository, IGrainFactory factory, IMapper mapper)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));

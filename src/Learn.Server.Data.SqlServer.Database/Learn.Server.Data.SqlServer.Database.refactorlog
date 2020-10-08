@@ -63,4 +63,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[FK_AuditType]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="cefd4512-7398-4f46-a873-c189589dc366" ChangeDateTime="10/07/2020 23:40:04">
+    <Property Name="ElementName" Value="[Identity].[User]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[Identity]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[AspNetUsers]" />
+  </Operation>
 </Operations>

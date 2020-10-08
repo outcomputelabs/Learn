@@ -1,4 +1,5 @@
-﻿using Learn.Server.Data.Repositories;
+﻿using IdentityServer4.EntityFramework.Options;
+using Learn.Server.Data.Repositories;
 using Learn.Server.Data.SqlServer;
 using Learn.Server.Data.SqlServer.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddDbContext<ApplicationDbContext>((provider, options) =>
                 {
                     options.UseSqlServer(provider.GetRequiredService<IOptions<SqlServerRepositoryOptions>>().Value.ConnectionString);
+                    options.EnableSensitiveDataLogging();
+                })
+                .Configure<OperationalStoreOptions>(options =>
+                {
+                    options.DefaultSchema = "Identity";
                 })
                 .AddSingleton<ICoursePathRepository, CoursePathRepository>()
                 .AddOptions<SqlServerRepositoryOptions>()

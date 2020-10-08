@@ -24,7 +24,7 @@ SELECT
     [AccessFailedCount]
 
 FROM
-    [Identity].[User]
+    [Identity].[AspNetUsers]
 
 WHERE
     [NormalizedUserName] = @NormalizedUserName

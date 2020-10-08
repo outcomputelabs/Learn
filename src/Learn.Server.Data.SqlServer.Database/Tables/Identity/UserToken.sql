@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [Identity].[UserToken]
 (
-    [UserId] INT NOT NULL,
+    [UserId] UNIQUEIDENTIFIER NOT NULL,
     [LoginProvider] NVARCHAR(255) NOT NULL,
     [Name] NVARCHAR(255) NOT NULL,
     [Value] NVARCHAR(255) NOT NULL,
@@ -16,7 +16,7 @@
     (
         [UserId]
     )
-    REFERENCES [Identity].[User]
+    REFERENCES [Identity].[AspNetUsers]
     (
         [Id]
     )

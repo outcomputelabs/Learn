@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [Identity].[UserRole]
 (
-	[UserId] INT NOT NULL,
+	[UserId] UNIQUEIDENTIFIER NOT NULL,
 	[RoleId] INT NOT NULL,
 
 	CONSTRAINT [PK_UserRole] PRIMARY KEY CLUSTERED
@@ -22,7 +22,7 @@
 	(
 		[UserId]
 	)
-	REFERENCES [Identity].[User]
+	REFERENCES [Identity].[AspNetUsers]
 	(
 		[Id]
 	)

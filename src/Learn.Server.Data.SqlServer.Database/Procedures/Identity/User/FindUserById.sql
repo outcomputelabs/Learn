@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [Identity].[FindUserById]
-    @Id INT
+    @Id UNIQUEIDENTIFIER
 AS
 
 SET NOCOUNT ON;
@@ -24,7 +24,7 @@ SELECT
     [AccessFailedCount]
 
 FROM
-    [Identity].[User]
+    [Identity].[AspNetUsers]
 
 WHERE
     [Id] = @Id

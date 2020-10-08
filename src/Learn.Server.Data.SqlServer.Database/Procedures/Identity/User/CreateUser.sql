@@ -1,10 +1,13 @@
 ﻿CREATE PROCEDURE [Identity].[CreateUser]
+    @Id UNIQUEIDENTIFIER,
 	@UserName NVARCHAR(255),
     @NormalizedUserName NVARCHAR(255),
     @Email NVARCHAR(255),
     @NormalizedEmail NVARCHAR(255),
     @EmailConfirmed BIT,
     @PasswordHash NVARCHAR(255),
+    @SecurityStamp UNIQUEIDENTIFIER,
+    @ConcurrencyStamp UNIQUEIDENTIFIER,
     @PhoneNumber NVARCHAR(255),
     @PhoneNumberConfirmed BIT,
     @TwoFactorEnabled BIT,
@@ -16,15 +19,11 @@ AS
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 
-DECLARE @Id INT = NEXT VALUE FOR [Identity].[UserSequence];
-DECLARE @SecurityStamp UNIQUEIDENTIFIER = NEWID();
-DECLARE @ConcurrencyStamp UNIQUEIDENTIFIER = NEWID();
-
 DECLARE @AuditId INT = NEXT VALUE FOR [Audit].[UserAuditSequence];
 DECLARE @AuditTypeId INT = (SELECT [Id] FROM [Audit].[AuditType] WHERE [Name] = 'INSERTED');
 DECLARE @AuditTimestamp DATETIMEOFFSET = SYSDATETIMEOFFSET();
 
-INSERT [Identity].[User]
+INSERT [Identity].[AspNetUsers]
 (
     [Id],
     [UserName],

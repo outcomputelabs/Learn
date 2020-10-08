@@ -4,7 +4,7 @@
     [AuditTypeId] INT NOT NULL,
     [AuditTimestamp] DATETIMEOFFSET NOT NULL,
 
-	[Id] INT NOT NULL,
+	[Id] UNIQUEIDENTIFIER NOT NULL,
     [UserName] NVARCHAR(255) NOT NULL,
     [NormalizedUserName] NVARCHAR(255) NOT NULL,
     [Email] NVARCHAR(255) NOT NULL,

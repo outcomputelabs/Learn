@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [Identity].[UpdateUser]
-    @Id INT,
+    @Id UNIQUEIDENTIFIER,
 	@UserName NVARCHAR(255),
     @NormalizedUserName NVARCHAR(255),
     @Email NVARCHAR(255),
@@ -25,7 +25,7 @@ DECLARE @AuditId INT = NEXT VALUE FOR [Audit].[UserAuditSequence];
 DECLARE @AuditTypeId INT = (SELECT [Id] FROM [Audit].[AuditType] WHERE [Name] = 'UPDATED');
 DECLARE @AuditTimestamp DATETIMEOFFSET = SYSDATETIMEOFFSET();
 
-UPDATE [Identity].[User]
+UPDATE [Identity].[AspNetUsers]
 SET
     [UserName] = @UserName,
     [NormalizedUserName] = @NormalizedUserName,

@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [Identity].[UserClaim]
 (
     [Id] INT NOT NULL,
-    [UserId] INT NOT NULL,
+    [UserId] UNIQUEIDENTIFIER NOT NULL,
     [ClaimType] NVARCHAR(255) NOT NULL,
     [ClaimValue] NVARCHAR(255) NOT NULL,
 
@@ -14,15 +14,9 @@
     (
         [UserId]
     )
-    REFERENCES [Identity].[User]
+    REFERENCES [Identity].[AspNetUsers]
     (
         [Id]
     )
 )
-GO
-
-CREATE SEQUENCE [Identity].[UserClaimSequence]
-AS INT
-START WITH 1
-INCREMENT BY 1
 GO
