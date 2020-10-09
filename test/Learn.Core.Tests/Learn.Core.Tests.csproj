@@ -4,7 +4,6 @@
     <TargetFramework>net5.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
-
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +16,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-    <PackageReference Include="Moq" Version="4.14.6" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.13.1.21947">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -34,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Learn.Server.Data.SqlServer\Learn.Server.Data.SqlServer.csproj" />
+    <ProjectReference Include="..\..\src\Learn.Core\Learn.Core.csproj" />
   </ItemGroup>
 
 </Project>
