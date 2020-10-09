@@ -70,4 +70,25 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="[AspNetUsers]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="2a257753-f07f-4989-b8be-914bf021b554" ChangeDateTime="10/09/2020 01:06:05">
+    <Property Name="ElementName" Value="[Identity].[UserClaim]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[Identity]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[UserClaims]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="33a32882-2e77-4765-94be-77c6e565bf0d" ChangeDateTime="10/09/2020 01:07:20">
+    <Property Name="ElementName" Value="[Identity].[UserClaims]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[Identity]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[AspNetUserClaims]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d0fe0bde-14e7-4b8d-a349-7fa136c5960f" ChangeDateTime="10/09/2020 01:09:02">
+    <Property Name="ElementName" Value="[Identity].[PersistedGrant]" />
+    <Property Name="ElementType" Value="SqlTable" />
+    <Property Name="ParentElementName" Value="[Identity]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[PersistedGrants]" />
+  </Operation>
 </Operations>

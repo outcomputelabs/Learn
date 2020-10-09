@@ -1,9 +1,9 @@
-﻿CREATE TABLE [Identity].[UserClaim]
+﻿CREATE TABLE [Identity].[AspNetUserClaims]
 (
     [Id] INT NOT NULL,
     [UserId] UNIQUEIDENTIFIER NOT NULL,
-    [ClaimType] NVARCHAR(255) NOT NULL,
-    [ClaimValue] NVARCHAR(255) NOT NULL,
+    [ClaimType] NVARCHAR(256) NOT NULL,
+    [ClaimValue] NVARCHAR(256) NOT NULL,
 
     CONSTRAINT [PK_UserClaim] PRIMARY KEY CLUSTERED
     (

@@ -1,9 +1,9 @@
-﻿CREATE TABLE [Identity].[PersistedGrant]
+﻿CREATE TABLE [Identity].[PersistedGrants]
 (
-	[Key] NVARCHAR(255) NOT NULL,
-    [Type] NVARCHAR(50) NOT NULL,
-    [SubjectId] NVARCHAR(255) NOT NULL,
-    [ClientId] NVARCHAR(255) NOT NULL,
+	[Key] NVARCHAR(256) NOT NULL,
+    [Type] NVARCHAR(256) NOT NULL,
+    [SubjectId] NVARCHAR(256) NOT NULL,
+    [ClientId] NVARCHAR(256) NOT NULL,
     [CreationTime] DATETIMEOFFSET NOT NULL,
     [Expiration] DATETIMEOFFSET NOT NULL,
     [Data] NVARCHAR(MAX) NOT NULL,

@@ -82,9 +82,9 @@
     <Build Include="Tables\Identity\Role.sql" />
     <Build Include="Tables\Identity\AspNetUsers.sql" />
     <Build Include="Tables\Identity\DeviceCode.sql" />
-    <Build Include="Tables\Identity\PersistedGrant.sql" />
+    <Build Include="Tables\Identity\PersistedGrants.sql" />
     <Build Include="Tables\Identity\RoleClaim.sql" />
-    <Build Include="Tables\Identity\UserClaim.sql" />
+    <Build Include="Tables\Identity\UserClaims.sql" />
     <Build Include="Tables\Identity\UserLogin.sql" />
     <Build Include="Tables\Identity\UserRole.sql" />
     <Build Include="Tables\Identity\UserToken.sql" />
