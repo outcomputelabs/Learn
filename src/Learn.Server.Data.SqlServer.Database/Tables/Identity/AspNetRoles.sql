@@ -1,0 +1,19 @@
+﻿CREATE TABLE [Identity].[AspNetRoles]
+(
+	[Id] NVARCHAR(256) NOT NULL,
+	[Name] NVARCHAR(256) NOT NULL,
+    [NormalizedName] NVARCHAR(256) NOT NULL,
+    [ConcurrencyStamp] UNIQUEIDENTIFIER NOT NULL,
+
+	CONSTRAINT [PK_AspNetRoles] PRIMARY KEY CLUSTERED
+	(
+		[Id]
+	)
+)
+GO
+
+CREATE SEQUENCE [Identity].[AspNetRolesSequence]
+AS INT
+START WITH 1
+INCREMENT BY 1
+GO

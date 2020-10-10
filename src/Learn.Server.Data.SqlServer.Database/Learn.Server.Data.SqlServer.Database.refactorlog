@@ -91,4 +91,109 @@
     <Property Name="ParentElementType" Value="SqlSchema" />
     <Property Name="NewName" Value="[PersistedGrants]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="a3a796b5-6010-43ac-82c1-651a66747543" ChangeDateTime="10/10/2020 21:31:48">
+    <Property Name="ElementName" Value="[Identity].[PK_DeviceCode]" />
+    <Property Name="ElementType" Value="SqlPrimaryKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetDeviceCodes]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PK_AspNetDeviceCodes]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="836ba0b8-d32c-4174-9d6f-46263800dac9" ChangeDateTime="10/10/2020 21:32:04">
+    <Property Name="ElementName" Value="[Identity].[PK_PersistedGrant]" />
+    <Property Name="ElementType" Value="SqlPrimaryKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetPersistedGrants]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PK_AspNetPersistedGrants]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b2b7ad57-b85d-449c-90d9-7150b87e7cd6" ChangeDateTime="10/10/2020 21:32:41">
+    <Property Name="ElementName" Value="[Identity].[PK_RoleClaim]" />
+    <Property Name="ElementType" Value="SqlPrimaryKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetRoleClaims]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PK_AspNetRoleClaims]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3115a5c9-0f1c-4e1d-aafd-3d1648833a90" ChangeDateTime="10/10/2020 21:33:00">
+    <Property Name="ElementName" Value="[Identity].[FK_RoleClaim_Role]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetRoleClaims]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_AspNetRoleClaims_AspNetRoles]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ca0ba78e-310b-4847-a716-e2b88aa179d3" ChangeDateTime="10/10/2020 21:33:46">
+    <Property Name="ElementName" Value="[Identity].[RoleClaimSequence]" />
+    <Property Name="ElementType" Value="SqlSequence" />
+    <Property Name="ParentElementName" Value="[Identity]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[AspNetRoleClaimsSequence]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="180ce11e-bce6-4bba-a74e-e1b47efe5e2b" ChangeDateTime="10/10/2020 21:34:36">
+    <Property Name="ElementName" Value="[Identity].[PK_Role]" />
+    <Property Name="ElementType" Value="SqlPrimaryKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetRoles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PK_AspNetRoles]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c602763e-bfe4-4f7a-baac-98e27c280256" ChangeDateTime="10/10/2020 21:34:48">
+    <Property Name="ElementName" Value="[Identity].[RoleSequence]" />
+    <Property Name="ElementType" Value="SqlSequence" />
+    <Property Name="ParentElementName" Value="[Identity]" />
+    <Property Name="ParentElementType" Value="SqlSchema" />
+    <Property Name="NewName" Value="[AspNetRolesSequence]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d351155c-7ece-4273-bea6-48d8f47c7c5c" ChangeDateTime="10/10/2020 21:35:06">
+    <Property Name="ElementName" Value="[Identity].[PK_UserClaim]" />
+    <Property Name="ElementType" Value="SqlPrimaryKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetUserClaims]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PK_AspNetUserClaims]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="508aaeb9-8b59-4dc0-b64b-e58cf51191c1" ChangeDateTime="10/10/2020 21:35:42">
+    <Property Name="ElementName" Value="[Identity].[FK_UserClaim_User]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetUserClaims]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_AspNetUserClaims_AspNetUsers]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="63a424bd-8b1d-4ca6-b112-ab6a4c430a1c" ChangeDateTime="10/10/2020 21:36:49">
+    <Property Name="ElementName" Value="[Identity].[PK_UserLogin]" />
+    <Property Name="ElementType" Value="SqlPrimaryKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetUserLogins]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PK_AspNetUserLogins]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e8231a89-5654-4157-8a15-d74c650f0891" ChangeDateTime="10/10/2020 21:37:06">
+    <Property Name="ElementName" Value="[Identity].[FK_UserLogin_User]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetUserLogins]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_AspNetUserLogins_AspNetUsers]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0efac414-e285-4356-81d3-5c5c90e2fb64" ChangeDateTime="10/10/2020 21:37:48">
+    <Property Name="ElementName" Value="[Identity].[PK_UserRole]" />
+    <Property Name="ElementType" Value="SqlPrimaryKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetUserRoles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PK_AspNetUserRoles]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="89b4b01c-58ae-4e05-a360-0d28217b5257" ChangeDateTime="10/10/2020 22:18:34">
+    <Property Name="ElementName" Value="[Identity].[FK_UserRole_Role]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetUserRoles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_AspNetUserRoles_AspNetRoles]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="23bf5546-a955-4ddc-9e29-ed9d82702590" ChangeDateTime="10/10/2020 22:18:56">
+    <Property Name="ElementName" Value="[Identity].[PK_UserToken]" />
+    <Property Name="ElementType" Value="SqlPrimaryKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetUserTokens]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PK_AspNetUserTokens]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fec08262-4cc5-479e-b480-ee822c797179" ChangeDateTime="10/10/2020 22:19:14">
+    <Property Name="ElementName" Value="[Identity].[FK_UserToken_User]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[Identity].[AspNetUserTokens]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[FK_AspNetUserTokens_AspNetUsers]" />
+  </Operation>
 </Operations>

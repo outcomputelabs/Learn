@@ -18,8 +18,8 @@ namespace Learn.Server.Data.SqlServer
 
             base.OnModelCreating(builder);
 
-            builder.Entity<ApplicationUser>().Property(x => x.Id).HasConversion(x => new Guid(x), x => x.ToString());
-            builder.Entity<ApplicationUser>().Property(x => x.ConcurrencyStamp).HasConversion(x => new Guid(x), x => x.ToString());
+            builder.Entity<ApplicationUser>().Property(x => x.Id).HasConversion<StringToGuidValueConverter>();
+            builder.Entity<ApplicationUser>().Property(x => x.ConcurrencyStamp).HasConversion<StringToGuidValueConverter>();
         }
     }
 }

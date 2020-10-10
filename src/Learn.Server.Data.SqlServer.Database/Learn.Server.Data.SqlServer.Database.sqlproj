@@ -60,40 +60,23 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
-    <Folder Include="Procedures" />
-    <Folder Include="Procedures\CoursePath" />
-    <Folder Include="Tables\Audit" />
     <Folder Include="Schemas" />
     <Folder Include="Scripts" />
     <Folder Include="Tables\Identity" />
-    <Folder Include="Procedures\Identity" />
-    <Folder Include="Procedures\Identity\User" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\CoursePath.sql" />
-    <Build Include="Procedures\CoursePath\GetCoursePaths.sql" />
-    <Build Include="Procedures\CoursePath\GetCoursePath.sql" />
-    <Build Include="Procedures\CoursePath\ClearCoursePath.sql" />
-    <Build Include="Procedures\CoursePath\SetCoursePath.sql" />
-    <Build Include="Tables\Audit\CoursePath.sql" />
     <Build Include="Schemas\Audit.sql" />
-    <Build Include="Tables\Audit\AuditType.sql" />
     <Build Include="Schemas\Identity.sql" />
-    <Build Include="Tables\Identity\Role.sql" />
+    <Build Include="Tables\Identity\AspNetRoles.sql" />
     <Build Include="Tables\Identity\AspNetUsers.sql" />
-    <Build Include="Tables\Identity\DeviceCode.sql" />
-    <Build Include="Tables\Identity\PersistedGrants.sql" />
-    <Build Include="Tables\Identity\RoleClaim.sql" />
-    <Build Include="Tables\Identity\UserClaims.sql" />
-    <Build Include="Tables\Identity\UserLogin.sql" />
-    <Build Include="Tables\Identity\UserRole.sql" />
-    <Build Include="Tables\Identity\UserToken.sql" />
-    <Build Include="Tables\Audit\UserAudit.sql" />
-    <Build Include="Procedures\Identity\User\CreateUser.sql" />
-    <Build Include="Procedures\Identity\User\DeleteUser.sql" />
-    <Build Include="Procedures\Identity\User\FindUserById.sql" />
-    <Build Include="Procedures\Identity\User\FindUserByNormalizedUserName.sql" />
-    <Build Include="Procedures\Identity\User\UpdateUser.sql" />
+    <Build Include="Tables\Identity\AspNetDeviceCodes.sql" />
+    <Build Include="Tables\Identity\AspNetPersistedGrants.sql" />
+    <Build Include="Tables\Identity\AspNetRoleClaims.sql" />
+    <Build Include="Tables\Identity\AspNetUserClaims.sql" />
+    <Build Include="Tables\Identity\AspNetUserLogins.sql" />
+    <Build Include="Tables\Identity\AspNetUserRoles.sql" />
+    <Build Include="Tables\Identity\AspNetUserTokens.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Learn.Server.Data.SqlServer.Database.publish.xml">
@@ -105,6 +88,5 @@
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
-    <None Include="Scripts\Script.PostDeployment.Seed.Audit.AuditType.sql" />
   </ItemGroup>
 </Project>

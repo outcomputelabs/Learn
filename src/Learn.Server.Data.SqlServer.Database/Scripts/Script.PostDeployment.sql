@@ -10,4 +10,3 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-:r .\Script.PostDeployment.Seed.Audit.AuditType.sql

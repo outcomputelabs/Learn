@@ -5,12 +5,12 @@
     [ClaimType] NVARCHAR(256) NOT NULL,
     [ClaimValue] NVARCHAR(256) NOT NULL,
 
-    CONSTRAINT [PK_UserClaim] PRIMARY KEY CLUSTERED
+    CONSTRAINT [PK_AspNetUserClaims] PRIMARY KEY CLUSTERED
     (
         [Id]
     ),
 
-    CONSTRAINT [FK_UserClaim_User] FOREIGN KEY
+    CONSTRAINT [FK_AspNetUserClaims_AspNetUsers] FOREIGN KEY
     (
         [UserId]
     )
@@ -19,4 +19,10 @@
         [Id]
     )
 )
+GO
+
+CREATE SEQUENCE [Identity].[AspNetUserClaimsSequence]
+AS INT
+START WITH 1
+INCREMENT BY 1
 GO

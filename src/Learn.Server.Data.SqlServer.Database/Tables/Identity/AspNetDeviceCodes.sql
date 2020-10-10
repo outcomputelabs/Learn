@@ -1,16 +1,16 @@
-﻿CREATE TABLE [Identity].[PersistedGrants]
+﻿CREATE TABLE [Identity].[AspNetDeviceCodes]
 (
-	[Key] NVARCHAR(256) NOT NULL,
-    [Type] NVARCHAR(256) NOT NULL,
+    [UserCode] NVARCHAR(256) NOT NULL,
+    [DeviceCode] NVARCHAR(256) NOT NULL,
     [SubjectId] NVARCHAR(256) NOT NULL,
     [ClientId] NVARCHAR(256) NOT NULL,
     [CreationTime] DATETIMEOFFSET NOT NULL,
     [Expiration] DATETIMEOFFSET NOT NULL,
     [Data] NVARCHAR(MAX) NOT NULL,
 
-    CONSTRAINT [PK_PersistedGrant] PRIMARY KEY
+    CONSTRAINT [PK_AspNetDeviceCodes] PRIMARY KEY CLUSTERED
     (
-        [Key]
+        [UserCode]
     )
 )
 GO
