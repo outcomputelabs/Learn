@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Learn.Server.Data;
+using Learn.Server.Data.SqlServer;
 using Learn.WebApp.Server.Middleware;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -74,12 +75,12 @@ namespace Learn.WebApp.Server
                             .AddDefaultIdentity<ApplicationUser>(options =>
                             {
                                 options.SignIn.RequireConfirmedAccount = true;
-                            });
-                        //.AddEntityFrameworkStores<ApplicationDbContext>();
+                            })
+                            .AddEntityFrameworkStores<ApplicationDbContext>();
 
                         services
-                            .AddIdentityServer();
-                        //.AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                            .AddIdentityServer()
+                            .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
                         services
                             .AddAuthentication()
