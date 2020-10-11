@@ -71,12 +71,14 @@ namespace Learn.WebApp.Server
                         });
 
                         // add identity services
+                        /*
                         services
                             .AddDefaultIdentity<ApplicationUser>(options =>
                             {
                                 options.SignIn.RequireConfirmedAccount = true;
                             })
                             .AddEntityFrameworkStores<ApplicationDbContext>();
+                        */
 
                         services
                             .AddIdentityServer()
