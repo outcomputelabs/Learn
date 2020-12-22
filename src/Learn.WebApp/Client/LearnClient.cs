@@ -22,7 +22,9 @@ namespace Learn.WebApp.Client
         {
             try
             {
-                return await _client.GetFromJsonAsync<IEnumerable<CoursePathModel>>("CoursePath").ConfigureAwait(false);
+                return await _client
+                    .GetFromJsonAsync<IEnumerable<CoursePathModel>>("CoursePath")
+                    .ConfigureAwait(false) ?? Enumerable.Empty<CoursePathModel>();
             }
             catch (AccessTokenNotAvailableException exception)
             {

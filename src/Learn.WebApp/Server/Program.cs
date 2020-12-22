@@ -70,6 +70,9 @@ namespace Learn.WebApp.Server
                             options.ConnectionString = context.Configuration.GetConnectionString("Learn");
                         });
 
+                        // add entity framework services
+                        services.AddDatabaseDeveloperPageExceptionFilter();
+
                         // add identity services
                         /*
                         services
@@ -96,7 +99,7 @@ namespace Learn.WebApp.Server
                         if (env.IsDevelopment())
                         {
                             app.UseDeveloperExceptionPage();
-                            app.UseDatabaseErrorPage();
+                            app.UseMigrationsEndPoint();
                             app.UseWebAssemblyDebugging();
                         }
                         else

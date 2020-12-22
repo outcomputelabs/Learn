@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
 namespace Learn.Server.Data.Exceptions
 {
     [Serializable]
-    [SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "Unused")]
     public class KeyAlreadyExistsException : Exception
     {
         public KeyAlreadyExistsException(Guid key) : base($"Key '{key}' already exists.")
@@ -15,7 +13,7 @@ namespace Learn.Server.Data.Exceptions
 
         protected KeyAlreadyExistsException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            Key = (Guid)info.GetValue(nameof(Key), typeof(Guid));
+            Key = (Guid)(info.GetValue(nameof(Key), typeof(Guid)) ?? Guid.Empty);
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

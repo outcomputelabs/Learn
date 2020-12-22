@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
+using static System.String;
 
 namespace Learn.Server.Data.Exceptions
 {
     [Serializable]
-    [SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "Unused")]
     public class NameAlreadyExistsException : Exception
     {
         public NameAlreadyExistsException(string name) : base($"Name '{name}' already exists.", null)
@@ -15,7 +14,7 @@ namespace Learn.Server.Data.Exceptions
 
         protected NameAlreadyExistsException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            Name = info.GetString(nameof(Name));
+            Name = info.GetString(nameof(Name)) ?? Empty;
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

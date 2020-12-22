@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
+using static System.String;
 
 namespace Learn.Server.Data.Exceptions
 {
     [Serializable]
-    [SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "Unused")]
     public class SlugAlreadyExistsException : Exception
     {
         public SlugAlreadyExistsException(string slug) : base($"Slug '{slug}' already exists.", null)
@@ -15,7 +14,7 @@ namespace Learn.Server.Data.Exceptions
 
         protected SlugAlreadyExistsException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            Slug = info.GetString(nameof(Slug));
+            Slug = info.GetString(nameof(Slug)) ?? Empty;
         }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

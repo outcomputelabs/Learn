@@ -3,7 +3,7 @@
 
 <AuthorizeView>
     <Authorized>
-        <a ref="authentication/profile">Hello, @context.User.Identity.Name!</a>
+        <a ref="authentication/profile">Hello, @context.User.Identity?.Name!</a>
         <button class="nav-link btn btn-link" @onclick="BeginSignOutAsync">Sign Out</button>
     </Authorized>
     <NotAuthorized>

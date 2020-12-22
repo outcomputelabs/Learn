@@ -29,7 +29,7 @@ namespace Learn.Server.Shared
 
         #region IEquatable
 
-        public bool Equals(CoursePath other)
+        public bool Equals(CoursePath? other)
         {
             if (other is null) return false;
 
@@ -39,7 +39,7 @@ namespace Learn.Server.Shared
                 && other.Version == Version;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is CoursePath other && Equals(other);
         }
